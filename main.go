@@ -21,15 +21,14 @@ type Person struct {
 
 func main() {
 	log.Println("starting API server")
-	//create a new router
+
 	router := mux.NewRouter()
 	log.Println("creating routes")
-	//specify endpoints
+	
 	router.HandleFunc("/health-check", HealthCheck).Methods("GET")
 	router.HandleFunc("/persons", Persons).Methods("GET")
 	http.Handle("/", router)
 
-	//start and listen to requests
 	http.ListenAndServe(":8080", router)
 
 }
@@ -43,7 +42,7 @@ func HealthCheck(w http.ResponseWriter, r *http.Request) {
 func Persons(w http.ResponseWriter, r *http.Request) {
 	log.Println("entering persons end point")
 	var response Response
-	persons := prepareResponse()
+	persons := prepareResponse() 	
 
 	response.Persons = persons
 
